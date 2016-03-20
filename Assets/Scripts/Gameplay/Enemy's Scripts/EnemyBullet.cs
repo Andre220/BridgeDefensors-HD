@@ -59,22 +59,18 @@ public class EnemyBullet : MonoBehaviour
 			{
 				case "MainCannon":
 					Destroy(this.gameObject);
-					PlayerGameObject.GetComponent<Player>().MainCannonLife -= 1;
 					//this.ThisTarget.gameObject.GetComponent<SpriteRenderer>().sprite = PlayerGameObject.GetComponent<Player>().MainCannonSprites[];
 				break;
 				case "LeftCannon":
 					Destroy(this.gameObject);
-					PlayerGameObject.GetComponent<Player>().LeftCannonLife -= 1;
 					//this.ThisTarget.gameObject.GetComponent<SpriteRenderer>().sprite = PlayerGameObject.GetComponent<Player>().LeftCannonSprites[];
 				break;
 				case "RightCannon":
 					Destroy(this.gameObject);
-					PlayerGameObject.GetComponent<Player>().RightCannonLife -= 1;
 					//this.ThisTarget.gameObject.GetComponent<SpriteRenderer>().sprite = PlayerGameObject.GetComponent<Player>().RightCannonSprites[];
 				break;
 				case "City":
 					Destroy(this.gameObject);
-					PlayerGameObject.GetComponent<Player>().CityLife -= 1;
 				break;
 			}
 		}
@@ -82,10 +78,10 @@ public class EnemyBullet : MonoBehaviour
 
 	void Death()
 	{
-		if(PlayerGameObject.GetComponent<Player>().MainCannonLife <= 0)
+		/*if(PlayerGameObject.GetComponent<Player>().MainCannonLife <= 0)
 		{
-			/*GameObject A = GameObject.Find("MainCannon") as GameObject;
-			Destroy(A);*/
+			//GameObject A = GameObject.Find("MainCannon") as GameObject;
+			//Destroy(A);
 			Destroy (GameObject.Find("MainCannon"));
 			//SpaceShipsAdmin.instance.Targets.Remove(A);
 		}
@@ -107,6 +103,6 @@ public class EnemyBullet : MonoBehaviour
 			GameObject A = GameObject.Find("City") as GameObject;
 			Destroy(A);
 			SpaceShipsAdmin.instance.Targets.Remove(A);
-		}
+		}*/
 	}
 }
