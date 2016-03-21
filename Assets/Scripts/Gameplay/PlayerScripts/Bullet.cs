@@ -3,7 +3,12 @@ using System.Collections;
 
 public class Bullet : MonoBehaviour 
 {
-	public int Force;
+	public int BulletSpeed;
+
+	void Start()
+	{
+		BulletSpeed = GameObject.Find ("GameAdmin").GetComponent<PlayerAttributes> ().Weapon_Equipped_BulletSpeed;
+	}
 
 	void Update () 
 	{
@@ -11,15 +16,15 @@ public class Bullet : MonoBehaviour
 		switch(this.gameObject.transform.parent.name)
 		{
 		case "MainCannon":
-			this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, Force);
+			this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0, BulletSpeed);
 			break;
 			
 		case "RightCannon":
-			this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-Force, Force);
+			this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(-BulletSpeed, BulletSpeed);
 			break;
 			
 		case "LeftCannon":
-			this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(Force, Force);
+			this.gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(BulletSpeed, BulletSpeed);
 			break;
 		}
 
@@ -31,7 +36,7 @@ public class Bullet : MonoBehaviour
 
 	void OnTriggerEnter2D(Collider2D Other)
 	{
-		if(Other.gameObject.tag == "Enemy")
+		if(Other.gameObject.tag == "Ship")
 		{
 			Destroy(this.gameObject);
 			Destroy(Other.gameObject);
