@@ -22,31 +22,34 @@ public class HumanAircraftAttributes : MonoBehaviour
 	public static HumanAircraftAttributes Instance;
 
 	public int[,] HShips_Basic_Attributes = new int[6,7]; //Armazena Dano[0, X], Velocidade do Projetil[1, X], Velocidade de movimento[2, X], vida[3, X], ContadorParaMover [4,X], Score[5,X]. 
+
 	public List<int> Cadence, Dispersion_Rate,Defense_Value, YDelays;
 	public List<float> PercenteCadence, Hit_Chance, YPositions;
+
+	public List<GameObject> Bullets;
 	public bool PleaseRandom;//Caso essa variavel se torne true, novos random sao feitos(apenas para as variaveis que sao definidas atraves de um random).
 
 	void Start () 
 	{ 
 		//As funçoes terimadas em "ValueDefine" so serao chamadas no start, pois elas apenas definem valores para as variaveis.
-		Basic_Attributes_ValueDefine();
-		Hit_Chance_ValueDefine ();
-		PercenteCadende_ValueDefine ();
-		YDelays_ValueRandom ();
-		Cadence_ValueRandom();
-		Bullet_Dispersion_ValueRandom();
-		Defense_Rate_ValueRandom();
+		Basic_Attributes_ValueDefine();//Start
+		Hit_Chance_ValueDefine ();//Start
+		PercenteCadende_ValueDefine ();//Start
+		YDelays_ValueRandom ();//NotStart
+		Cadence_ValueRandom();//NotStart
+		Bullet_Dispersion_ValueRandom();//NotStart
+		Defense_Rate_ValueRandom();//NotStart
 	}
 
 	void Update () 
 	{
 		if(PleaseRandom)
 		{
-			Cadence_ValueRandom();
+			/*Cadence_ValueRandom();
 			Bullet_Dispersion_ValueRandom();
 			Defense_Rate_ValueRandom();
 			YDelays_ValueRandom();
-			PleaseRandom = false;
+			PleaseRandom = false;*/
 		}
 	}
 
@@ -54,11 +57,11 @@ public class HumanAircraftAttributes : MonoBehaviour
 	void PercenteCadende_ValueDefine()
 	{
 		//Define a porcentagem de dar o minimo de disparos
-		PercenteCadence [0] = 0.7f;//70% Ship01
-		PercenteCadence [1] = 0.6f;//60% Ship02
-		PercenteCadence [2] = 0.5f;//50% Ship03
-		PercenteCadence [3] = 0.3f;//30% Ship04
-		PercenteCadence [4] = 0.25f;//25% Ship05
+		PercenteCadence.Insert(0, 0.7f);//70% Aircraft01
+		PercenteCadence.Insert(1, 0.6f);;//60% Aircraft02
+		PercenteCadence.Insert(2, 0.5f);;//50% Aircraft03
+		PercenteCadence.Insert(3, 0.3f);//30% Aircraft04
+		PercenteCadence.Insert(4, 0.25f);//25% VTOLBoss
 	}
 
 	void Cadence_ValueRandom()
@@ -71,85 +74,66 @@ public class HumanAircraftAttributes : MonoBehaviour
 		}
 		//Caso o valor do sorteio seja menor que a Porcentagem de cadencia, o minimo de tiros ocorre, senao, o maximo de tiros ocorre.
 		if (Percentage[0] < PercenteCadence [0]) //Aircraft01
-		{Cadence [0] = 0;} 
+		{Cadence.Insert(0, 0);} 
 		else 
-		{Cadence [0] = 1;}
+		{Cadence.Insert(0, 1);}
 		if (Percentage[1] < PercenteCadence [1]) //Aircraft02
-		{Cadence [1] = 0;} 
+		{Cadence.Insert(1, 0);} 
 		else 
-		{Cadence [1] = 1;}
+		{Cadence.Insert(1, 1);}
 		if (Percentage[2] < PercenteCadence [2]) //Aircraft03
-		{Cadence [2] = 1;} 
+		{Cadence.Insert(2, 1);} 
 		else 
-		{Cadence [2] = 2;}
+		{Cadence.Insert(2, 2);}
 		if (Percentage[3] < PercenteCadence [3]) //Aircraft04
-		{Cadence [3] = 1;} 
+		{Cadence.Insert(3, 1);} 
 		else 
-		{Cadence [3] = 2;}
+		{Cadence.Insert(3, 2);}
 		if (Percentage[4] < PercenteCadence [4]) //VTOLBoss
-		{Cadence [4] = 2;} 
+		{Cadence.Insert(4, 2);} 
 		else 
-		{Cadence [4] = 3;}
+		{Cadence.Insert(4, 3);}
 	}//------------------------------------------------------------------------------------------------------
 
 	void Hit_Chance_ValueDefine()//Define a chance da bala ir diretamente para um alvo
 	{//Sorteio e efetuado na propria classe da nave
-		Hit_Chance [0] = 0.2f; //Se o sorteio for maior que Hit_Chance[0], a bala acerta o canhao.
-		Hit_Chance [1] = 0.4f; //Se o sorteio for maior que Hit_Chance[1], a bala acerta o canhao.
-		Hit_Chance [2] = 0.5f; //Se o sorteio for maior que Hit_Chance[2], a bala acerta o canhao.
-		Hit_Chance [3] = 0.6f; //Se o sorteio for maior que Hit_Chance[3], a bala acerta o canhao.
-		Hit_Chance [4] = 0.75f; //Se o sorteio for maior que Hit_Chance[4], a bala acerta o canhao.
+		Hit_Chance.Insert(0, 0.8f);//Se o sorteio de Aircraft01 for maior que Hit_Chance[0], a bala acerta o canhao.
+		Hit_Chance.Insert(1, 0.6f);//Se o sorteio for Aircraft02 que Hit_Chance[1], a bala acerta o canhao.
+		Hit_Chance.Insert(2, 0.5f);//Se o sorteio for Aircraft03 que Hit_Chance[2], a bala acerta o canhao.
+		Hit_Chance.Insert(3, 0.4f);//Se o sorteio for Aircraft04 que Hit_Chance[3], a bala acerta o canhao.
+		Hit_Chance.Insert(4, 0.25f);//Se o sorteio for VTOLBoss que Hit_Chance[4], a bala acerta o canhao.
 	}
 
 	void YDelays_ValueRandom()
-	{
+	{//Valor do delay em Y. Como funciona: Start > YIndex = 1 / QuandoNaveForPassarPeloCenario > YIndex += YDelay > Position.Y = [YIndex];
 		YDelays.Insert (0, 1);
 		YDelays.Insert (1, 1);
 		YDelays.Insert (2, Random.Range(1,2));
 		YDelays.Insert (3, Random.Range(1,2));
-		YDelays.Insert (4, Random.Range(1,6));
+		YDelays.Insert (4, Random.Range	(1,6));
 		YDelays.Insert (5, 0);
 		YDelays.Insert (6, 0);
 	}
 
 	void Bullet_Dispersion_ValueRandom()
 	{
-		/*for(int i = 0; i < Dispersion_Rate.Capacity; i++)
-		{
-			switch(i)
-			{
-				case 0:
-					Dispersion_Rate.Add(1);
-				break;
-				case 1:
-					Dispersion_Rate.Add(1);
-				break;
-				case 2:
-					Dispersion_Rate.Add(Random.Range (1, 2));
-				break;
-				case 3:
-					Dispersion_Rate.Add(Random.Range (1, 2));
-				break;
-				case 4:
-					Dispersion_Rate.Add(Random.Range (2, 3));
-				break;
-			}
-		}
-		Dispersion_Rate [0] = 1; // A nave ira atirar 1 bala a cada passada
-		Dispersion_Rate [1] = 1; // A nave pode atirar 1 bala a cada passada
-		Dispersion_Rate [2] = Random.Range (1, 2); // A nave pode atirar entre 1 e 2 balas a cada passada
-		Dispersion_Rate [3] = Random.Range (1, 2); // A nave pode atirar entre 1 e 2 balas a cada passada
-		Dispersion_Rate [4] = Random.Range (2, 3); // A nave pode atirar entre 2 e 3 balas*/
+		Dispersion_Rate.Insert(0, 1);// A Aircraft01 pode atirar 0 ou 1 bala a cada passada
+		Dispersion_Rate.Insert(1, 1);// A Aircraft02 vai atirar 1 bala a cada passada
+		Dispersion_Rate.Insert(2, Random.Range(1,2));// A Aircraft03 pode atirar entre 1 e 2 balas a cada passada
+		Dispersion_Rate.Insert(3, Random.Range(1,2));// A Aircraft04 pode atirar entre 1 e 2 balas a cada passada
+		Dispersion_Rate.Insert(4, Random.Range(2,3));// A VTOLBoss pode atirar entre 2 e 3 balas
 	}
 
 	void Defense_Rate_ValueRandom()
 	{
 		//A cada tiro que e levado, a nave recebe (Dano do tiro - Defesa da nave) de dano.
-		Defense_Value [0] = Random.Range (10, 16); // O valor da defesa da nave pode ser entre 10 e 15
-		Defense_Value [1] = Random.Range (10, 16); // O valor da defesa da nave pode ser entre 10 e 15
-		Defense_Value [2] = Random.Range (15, 21); // O valor da defesa da nave pode ser entre 15 e 20
-		Defense_Value [3] = Random.Range (15, 26); // O valor da defesa da nave pode ser entre 15 e 25
-		Defense_Value [4] = Random.Range (25, 41);// O valor da defesa da nave pode ser entre 25 e 40
+		Defense_Value.Insert(0, Random.Range (10, 16));// O valor da defesa da Aircraft01 pode ser entre 10 e 15
+		Defense_Value.Insert(1, Random.Range (10, 16));// O valor da defesa da Aircraft02 pode ser entre 10 e 15
+		Defense_Value.Insert(2, Random.Range (15, 21));// O valor da defesa da Aircraft03 pode ser entre 15 e 20
+		Defense_Value.Insert(3, Random.Range (15, 26));// O valor da defesa da Aircraft04 pode ser entre 15 e 25
+		Defense_Value.Insert(4, Random.Range (25, 41));// O valor da defesa da VTOLBoss pode ser entre 25 e 40
+		Defense_Value.Insert(5, 15);// O valor da defesa da Cargo_Aircraft pode ser entre 25 e 40
+		Defense_Value.Insert(6, 0);// O valor da defesa da Passenger_Aircraft pode ser entre 25 e 40
 	}
 
 	void Basic_Attributes_ValueDefine()
@@ -189,14 +173,14 @@ public class HumanAircraftAttributes : MonoBehaviour
 		HShips_Basic_Attributes [3, 4] = 500; //Life
 		HShips_Basic_Attributes [4, 4] = 150; //CounterToMove
 		HShips_Basic_Attributes [5, 4] = 1000; //Score
-		//Cargo Aircraft
+		//Cargo_Aircraft
 		HShips_Basic_Attributes [0, 5] = 0; //Damage
 		HShips_Basic_Attributes [1, 5] = 0; //BulletSpeed
 		HShips_Basic_Attributes [2, 5] = 50; //MovSpeed
 		HShips_Basic_Attributes [3, 5] = 20; //Life
 		HShips_Basic_Attributes [4, 5] = 60; //CounterToMove
 		HShips_Basic_Attributes [5, 5] = 250; //Score
-		//Passenger Aircraft
+		//Passenger_Aircraft
 		HShips_Basic_Attributes [0, 6] = 0; //Damage
 		HShips_Basic_Attributes [1, 6] = 0; //BulletSpeed
 		HShips_Basic_Attributes [2, 6] = 25; //MovSpeed
@@ -205,11 +189,11 @@ public class HumanAircraftAttributes : MonoBehaviour
 		HShips_Basic_Attributes [5, 6] = -100; //Score
 
 		//YPositions
-		/*YPositions [0] = 17f;
-		YPositions [1] = 13.5f;
-		YPositions [2] = 10f;
-		YPositions [3] = 6.5f;
-		YPositions [4] = 3f;
-		YPositions [5] = -5f;*/
+		YPositions.Insert(0, 17f);
+		YPositions.Insert(1, 13.5f);
+		YPositions.Insert (2, 10f);
+		YPositions.Insert (3, 6.5f);
+		YPositions.Insert (4, 3f);
+		YPositions.Insert (5, -0.5f);
 	}
 }
