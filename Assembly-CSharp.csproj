@@ -46,13 +46,15 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Gameplay\Enemy&apos;s Scripts\EnemyAttributes.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\DebugMode.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Enemy&apos;s Scripts\EnemyAdm.cs" />
      <Compile Include="Assets\Scripts\Gameplay\Enemy&apos;s Scripts\EnemyBullet.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Enemy&apos;s Scripts\Ship.cs" />
-     <Compile Include="Assets\Scripts\Gameplay\Enemy&apos;s Scripts\SpaceShipsAdmin.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Enemy&apos;s Scripts\EnemyIA.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\Enemy&apos;s Scripts\HumanAircraftAttributes.cs" />
      <Compile Include="Assets\Scripts\Gameplay\PlayerScripts\Bullet.cs" />
      <Compile Include="Assets\Scripts\Gameplay\PlayerScripts\Player.cs" />
      <Compile Include="Assets\Scripts\Gameplay\PlayerScripts\PlayerAttributes.cs" />
+     <Compile Include="Assets\Scripts\Gameplay\RendererExtensions.cs" />
      <Compile Include="Assets\Scripts\UI\Button.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
