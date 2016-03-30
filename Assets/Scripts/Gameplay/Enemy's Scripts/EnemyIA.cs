@@ -7,11 +7,10 @@ public class EnemyIA : MonoBehaviour
 	public GameObject GameAdmin;
 
 	//Constantes
-	public int MyDamage, MyCadence, MyBulletVel, MyMoveSpeed, MyLife, MyScore, MyDispersion, MyDefense;
+	public int MyCadence, MyMoveSpeed, MyLife, MyScore, MyDispersion, MyDefense;
 	public List<Transform> MyShootPositions;
 	//Nao constantes
 	public int  AreaR, AreaL, AreaC;//Locais onde a nave ira atirar
-	public float MyPercenteCadence, MyHitChance;
 	public int XLimit, MyMoveCounter, StartMoveCounter, MyYDelay, MyYIndex;//Variaveis que armazenam valores relacionados ao movimento das naves.
 
 	public bool OutOfScreen, RightSideOfScreen, CanShoot;
@@ -21,6 +20,7 @@ public class EnemyIA : MonoBehaviour
 		GameAdmin = EnemyAdm.Instance.GameAdmin;
 		PositionOnScreen ();
 		Getting_Data ();
+		WhereShoot ();
 	
 		this.MyYIndex = 0;
 		this.StartMoveCounter = this.MyMoveCounter;
@@ -37,20 +37,14 @@ public class EnemyIA : MonoBehaviour
 	void PositionOnScreen()//Void que testa se a nave esta dentro ou fora da tela, e se a posiçao dela e positiva ou negativa
 	{
 		if(this.gameObject.transform.position.x >= XLimit || this.gameObject.transform.position.x <= -XLimit)
-		{
-			this.OutOfScreen = true;
-		}else
-		{
-			this.OutOfScreen = false;
-		}
+		{this.OutOfScreen = true;}
+		else
+		{this.OutOfScreen = false;}
 
 		if(this.gameObject.transform.position.x > 0)
-		{
-			this.RightSideOfScreen = true;
-		}else
-		{
-			this.RightSideOfScreen = false;
-		}
+		{this.RightSideOfScreen = true;}
+		else
+		{this.RightSideOfScreen = false;}
 	}
 
 	void Moving()
@@ -121,7 +115,8 @@ public class EnemyIA : MonoBehaviour
 	{
 		if (CanShoot) 
 		{
-			switch (this.MyDispersion) {//Estou vendo quantas balas eu devo atirar.
+			switch (this.MyDispersion) {
+				//Estou vendo quantas balas eu devo atirar.
 			case 1:
 				GameObject Bullet1 = Instantiate (GameAdmin.GetComponent<HumanAircraftAttributes>().Bullets [0], this.MyShootPositions[0].position, Quaternion.identity) as GameObject;
 				Bullet1.name = this.gameObject.name + "Bullet";
@@ -215,14 +210,10 @@ public class EnemyIA : MonoBehaviour
 			break;
 		}
 		//Pegando dados do Script HumanAircraftAttributes do GameAdmin
-		this.MyDamage = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[0,IndexY];
-		this.MyBulletVel = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[1,IndexY];
 		this.MyMoveSpeed = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[2,IndexY];
 		this.MyLife = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[3,IndexY];
 		this.MyMoveCounter = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[4,IndexY];
 		this.MyScore = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[5,IndexY];
-		this.MyHitChance = GameAdmin.GetComponent<HumanAircraftAttributes>().PercenteHit[IndexY];
-		this.MyPercenteCadence = GameAdmin.GetComponent<HumanAircraftAttributes>().PercenteCadence[IndexY];
 		this.MyCadence = GameAdmin.GetComponent<HumanAircraftAttributes>().Cadence[IndexY];
 		this.MyDispersion = GameAdmin.GetComponent<HumanAircraftAttributes>().Dispersion[IndexY];
 		this.MyDefense = GameAdmin.GetComponent<HumanAircraftAttributes>().Defense_Rate[IndexY];

@@ -5,7 +5,7 @@ public class EnemyBullet : MonoBehaviour
 {
 	public GameObject GameAdmin;
 	public Vector3 Target;
-	public int MyBulletVel;
+	public int MyBulletVel, MyDamage;
 	public float MyPercentHit, MyPercentage;
 
 	// Use this for initialization
@@ -13,7 +13,7 @@ public class EnemyBullet : MonoBehaviour
 	{
 		GameAdmin = GameObject.Find ("GameAdmin");
 		Getting_Data ();
-		MyPercentage = Random.value;
+		MyPercentage = 1;//Random.value;
 
 		if(MyPercentage > MyPercentHit)
 		{Target = GameAdmin.GetComponent<EnemyAdm>().Targets[Random.Range(0, GameAdmin.GetComponent<EnemyAdm>().Targets.Count)].transform.position;}
@@ -23,7 +23,7 @@ public class EnemyBullet : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		this.gameObject.GetComponent<Rigidbody2D> ().velocity = Vector2.MoveTowards (gameObject.transform.position, Target, -this.MyBulletVel * Time.deltaTime);
+		this.gameObject.GetComponent<Rigidbody2D> ().velocity = Vector2.MoveTowards (gameObject.transform.position, Target, this.MyBulletVel);
 
 		if(this.gameObject.transform.position == Target)
 		{
@@ -41,22 +41,27 @@ public class EnemyBullet : MonoBehaviour
 		switch(this.gameObject.name)
 		{
 			case "Aircraft01Bullet":
+			this.MyDamage = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[0,0];
 			this.MyBulletVel = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[1,0];
 			this.MyPercentHit = GameAdmin.GetComponent<HumanAircraftAttributes>().PercenteHit[0];
 			break;
 			case "Aircraft02Bullet":
+			this.MyDamage = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[0,1];
 			this.MyBulletVel = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[1,1];
 			this.MyPercentHit = GameAdmin.GetComponent<HumanAircraftAttributes>().PercenteHit[1];
 			break;
 			case "Aircraft03Bullet":
+			this.MyDamage = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[0,2];
 			this.MyBulletVel = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[1,2];
 			this.MyPercentHit = GameAdmin.GetComponent<HumanAircraftAttributes>().PercenteHit[2];
 			break;
 			case "Aircraft04Bullet":
+			this.MyDamage = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[0,3];
 			this.MyBulletVel = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[1,3];
 			this.MyPercentHit = GameAdmin.GetComponent<HumanAircraftAttributes>().PercenteHit[3];
 			break;
 			case "VTOLBossBullet":
+			this.MyDamage = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[0,4];
 			this.MyBulletVel = GameAdmin.GetComponent<HumanAircraftAttributes>().HShips_Basic_Attributes[1,4];
 			this.MyPercentHit = GameAdmin.GetComponent<HumanAircraftAttributes>().PercenteHit[4];
 			break;
