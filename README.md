@@ -1,23 +1,51 @@
-# BridgeDefensors-HD - EM CONSTRUÇÃO
+# Bridge Defensors
 
-Resumo do projeto:
-Remake do jogo de Atari "Defender", feito com a game Engine Unity3D e C#.
+![Game Title](https://github.com/Andre220/BridgeDefensorsLearningGame/blob/master/Promocional/GamePlay.png)
 
-Sinopse:
+## Português:
 
-Quando um virus digital assume o controle de todo sistema aeronáutico, toda aeronave se tornou hostil e começou a atacar todos na terra.
-Como comandante da linha de defesa, seu trabalho é controlar todo o poder de fogo em terra e em mar para derrubar toda aeronave hostil.
+Terceiro projeto feito no curso técnico de Programação de Jogos Digitais do SENAI. Este é um remake do projeto [BridgeDefensorsLearningGame](https://github.com/Andre220/BridgeDefensorsLearningGame) feito na Unity3D para conhecer a engine.
 
-Recursos:
-* Não sei o que já está implementado, eu criei este projeto a 4 anos atrás. Estou tentando descobrir o que já foi implementado e melhorar o projeto
+  #### Resumo:
+  
+  Um vírus digital infectou todo o sistema aéreo mundial, contaminando todos os controles de todas as aeronaves pelo mundo. Estas espaçonaves começaram a bombardear diversas estruturas ao redor do globo, incluindo a Golden Gate (Califórnia), a grande muralha da China (China), a Tower Bridge (Londres) e a ponte Rio-Niterói (Brasil). 
+  Em um esforço conjunto, todas as nações do mundo juntaram suas forças marítimas e terrestres para derrubar as aeronaves.
+  
+  #### Controles
+  * A - Disparar com tanque/navio esquerdo
+  * D - Disparar com tanque/navio direito
+  * W - Disparar com tanque/navio do meio
 
-Project summary:
-Remake of the Atari game "Defender", made with the game engine Unity3D and C#.
+  #### Plataforma
+  Microsoft Windows
+  
+  #### Softwares/Tecnologias usadas:
+  1. C#
+  2. Unity3D
+  3. Adobe Illustrator
+  
+  #### Créditos:
+  1. André Felipe dos Santos (Programador)
+  2. Luiz Guerra (Artista)
+  3. Felipe Camilo (Artista)
 
-Synopsis:
+  #### Melhorias a Fazer em programação:
+  - [X] Lógica de disparos.
+  - [X] Movimento das balsas.
+  - [ ] Mudança de telas.
+  - [ ] Adicionar tela inicial com botão de "Start".
+  - [ ] Refatorar o código. Esta versão foi feita antes da versão 4.6 da Unity, utilizando GUI para interface.
+  - [X] Adicionar lógica de ataque das aeronaves.
+  - [ ] Refatora a lógicae ataque. Os atributos das naves estão armazenados em uma matriz. Scriptable Objects seria mais interessante.
+  - [ ] Adicionar lógica de GameOver.
+  - [ ] Adicionar os cenários finais.
 
-When a digital virus take control of every aero system, every aircraft turn into hostile and start attack everyone on earth.
-As the commander of the defense line, you have to control the ground and water fire power to drop down every hostile aircraft.
-
-Features:
-* Dont know what's already implemented, i made this project 4 years ago. Trying to find what's already implemented and work to improve ;D
+  #### Melhorias a Fazer em arte:
+  - [X] Criação da arte protótipo do cenário.
+  - [X] Criação da arte protótipo dos tanques.
+  - [X] Criação da arte protótipo da aeronave.
+  - [X] Criação da arte protótipo do projétil
+  - [ ] Adição das artes dos cenários.
+  - [ ] Melhorias na arte dos tanques.
+  - [ ] Adição da arte dos navios.
+  - [ ] Melhorias na arte das aeronaves.
