@@ -1,6 +1,6 @@
 # Bridge Defensors
 
-![Game Title](https://github.com/Andre220/BridgeDefensorsLearningGame/blob/master/Promocional/GamePlay.png)
+![Game Title](https://github.com/Andre220/BridgeDefensors-HD/blob/master/Promocional/GamePlay.png)
 
 ## Português:
 
